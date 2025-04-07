@@ -41,12 +41,11 @@ const onSubmit = async () => {
     errorMessage.value = null
 
     try {
-        debugger
         const response: BaseResponse<LoginResponse> = await login(loginForm.value)
 
         if (response.success) {
             authStore.setToken(response.response.token)
-            router.push({ name: 'about' })
+            router.push({ name: 'home' })
         } else {
             errorMessage.value = response.msg
         }

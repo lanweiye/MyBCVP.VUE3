@@ -1,11 +1,12 @@
-import axios from 'axios'
+// import axios from 'axios'
 import type { AxiosResponse } from 'axios'
+import { get } from '@/utils/axiosInstance' // 使用配置好的 axios 实例来封装登录请求
 
 /**
- * @description
- * @author YouYou
- * @export
+ * 请求的入参接口
  * @interface LoginRequest
+ * @property {string} name - 用户名
+ * @property {string} pass - 密码
  */
 export interface LoginRequest {
   name: string
@@ -13,11 +14,14 @@ export interface LoginRequest {
 }
 
 /**
- * @description
- * @author YouYou
- * @export
- * @interface BaseResponse
+ * 基础响应接口，使用泛型 T 来表示响应体
  * @template T
+ * @interface BaseResponse
+ * @property {number} status - HTTP 响应状态码
+ * @property {boolean} success - 请求是否成功
+ * @property {string} msg - 响应的消息
+ * @property {string | null} [msgDev] - 开发用的详细信息，可能为空
+ * @property {T} response - 具体的响应数据
  */
 export interface BaseResponse<T> {
   status: number
@@ -28,10 +32,12 @@ export interface BaseResponse<T> {
 }
 
 /**
- * @description
- * @author YouYou
- * @export
+ * 登录响应接口
  * @interface LoginResponse
+ * @property {boolean} success - 是否登录成功
+ * @property {string} token - JWT token
+ * @property {number} expires_in - token 的有效时长（秒）
+ * @property {string} token_type - token 类型，通常为 "Bearer"
  */
 export interface LoginResponse {
   success: boolean
@@ -49,16 +55,14 @@ export interface LoginResponse {
  */
 export const login = async (params: LoginRequest): Promise<BaseResponse<LoginResponse>> => {
   try {
-    const response: AxiosResponse<BaseResponse<LoginResponse>> = await axios.get(
+    const response = await get<BaseResponse<LoginResponse>>(
       'http://localhost:9291/api/Login/JWTToken3.0',
       {
-        params: {
-          name: params.name,
-          pass: params.pass,
-        },
+        name: params.name,
+        pass: params.pass,
       },
     )
-    return response.data
+    return response
   } catch (error) {
     throw new Error('请求失败')
   }
