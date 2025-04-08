@@ -1,6 +1,7 @@
 // import axios from 'axios'
 import type { AxiosResponse } from 'axios'
 import { get } from '@/utils/axiosInstance' // 使用配置好的 axios 实例来封装登录请求
+import { useAuthStore } from '@/stores/auth'
 
 /**
  * 请求的入参接口
@@ -44,6 +45,18 @@ export interface LoginResponse {
   token: string
   expires_in: number
   token_type: string
+}
+
+export const userInfo = async () : Promise<BaseResponse<User.UserResponse>> => {
+  try {
+    const userStore = useAuthStore()
+    const response = await get<BaseResponse<User.UserResponse>>('/api/user/getInfoByToken',{
+      token: userStore.token,
+    })
+    return response
+  } catch (error) {
+    throw new Error('请求失败')
+  }
 }
 
 /**

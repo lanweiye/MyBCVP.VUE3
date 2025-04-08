@@ -33,13 +33,18 @@ import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { ElNotification,ElMessage } from "element-plus";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
-import type { ElForm } from "element-plus";
-import { login } from "@/api/loginApi";
+import type { ElForm, UserInput } from "element-plus";
+import { login, userInfo } from "@/api/loginApi";
+import { useUserInfoStore } from '@/stores/useUserInfoStore';
 import type { LoginRequest, BaseResponse, LoginResponse } from '@/api/loginApi';
 import { useAuthStore } from '@/stores/auth';
 
 const router = useRouter();
 const authStore = useAuthStore()
+const userInfoStore = useUserInfoStore()
+const userInfoRes: BaseResponse<User.UserResponse> = await userInfo()
+userInfoStore.setUser(userInfoRes.response)
+
 const loginForm = ref<LoginRequest>({
     name: '',
     pass: '',
