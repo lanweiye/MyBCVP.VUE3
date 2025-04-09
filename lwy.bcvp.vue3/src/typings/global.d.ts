@@ -23,3 +23,32 @@ declare namespace User {
     RIDs: string[]
   }
 }
+
+
+/* 菜单 */
+declare namespace Menu {
+    interface MenuOptions {
+      id: string;
+      pid: string;
+      order: number;
+      name: string;
+      IsHide: boolean;
+      IsButton: boolean;
+      path: string;
+      Func: string | null;
+      component?: string | (() => Promise<unknown>);
+      iconCls: string;
+      meta: MetaProps;
+      children?: MenuOptions[] | null;
+    }
+    interface MetaProps {
+      title: string | null;
+      requireAuth: boolean;
+      NoTabPage: boolean;
+      keepAlive: boolean;
+    }
+    
+    export interface MenuRequest {
+      uid: string;
+    }
+  }

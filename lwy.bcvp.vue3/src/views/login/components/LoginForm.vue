@@ -38,12 +38,12 @@ import { login, userInfo } from "@/api/loginApi";
 import { useUserInfoStore } from '@/stores/useUserInfoStore';
 import type { LoginRequest, BaseResponse, LoginResponse } from '@/api/loginApi';
 import { useAuthStore } from '@/stores/auth';
+import { initDynamicRouter } from "@/router/modules/dynamicRouter";
 
 const router = useRouter();
 const authStore = useAuthStore()
 const userInfoStore = useUserInfoStore()
-const userInfoRes: BaseResponse<User.UserResponse> = await userInfo()
-userInfoStore.setUser(userInfoRes.response)
+
 
 const loginForm = ref<LoginRequest>({
     name: '',
@@ -72,7 +72,12 @@ const loginModule  = (formEl: FormInstance | undefined) => {
       if (response.success) {
         // 保存token 到pinia
         authStore.setToken(response.response.token)
-
+        
+        const userInfoRes: BaseResponse<User.UserResponse> = await userInfo()
+        userInfoStore.setUser(userInfoRes.response)
+        // 2.添加动态路由
+        const menuReq: Menu.MenuRequest = { uid: userInfoRes.response.uID }
+        await initDynamicRouter(menuReq)
         ElNotification({
             title: '首页',
             message: "欢迎登录LWY.BCVP.VUE3",

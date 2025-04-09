@@ -80,3 +80,18 @@ export const login = async (params: LoginRequest): Promise<BaseResponse<LoginRes
     throw new Error('请求失败')
   }
 }
+/**
+ * 获取菜单列表
+ * @param params 
+ * @returns 
+ */
+export const getAuthMenuListApi = async (params: Menu.MenuRequest) : Promise<BaseResponse<Menu.MenuOptions>> => {
+  try {
+    const response = await get<BaseResponse<Menu.MenuOptions>>('/api/permission/GetNavigationBar',{
+      uid: params.uid,
+    })
+    return response
+  } catch (error) {
+    throw new Error('请求失败')
+  }
+}

@@ -9,7 +9,7 @@
                     <img class="login-icon" src="@/assets/images/logo.svg" alt="">
                     <h2 class="login-text">lwy.BCVP.VUE3</h2>
                 </div>
-                <LoginForm />
+                <LoginForm></LoginForm>
             </div>
         </div>
     </div>
