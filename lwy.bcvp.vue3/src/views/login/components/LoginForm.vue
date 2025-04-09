@@ -42,8 +42,7 @@ import { useAuthStore } from '@/stores/auth';
 const router = useRouter();
 const authStore = useAuthStore()
 const userInfoStore = useUserInfoStore()
-const userInfoRes: BaseResponse<User.UserResponse> = await userInfo()
-userInfoStore.setUser(userInfoRes.response)
+
 
 const loginForm = ref<LoginRequest>({
     name: '',
@@ -72,7 +71,10 @@ const loginModule  = (formEl: FormInstance | undefined) => {
       if (response.success) {
         // 保存token 到pinia
         authStore.setToken(response.response.token)
-
+        // 在 <script setup> 中，顶级作用域的 await 会阻塞组件的初始化。如果 userInfo() 函数没有正确返回或者被某种方式"挂起"（而不是抛出错误），这可能导致组件初始化过程不完整
+        // 获取用户信息 需要在登录成功之后
+        const userInfoRes: BaseResponse<User.UserResponse> = await userInfo()
+        userInfoStore.setUser(userInfoRes.response)
         ElNotification({
             title: '首页',
             message: "欢迎登录LWY.BCVP.VUE3",
