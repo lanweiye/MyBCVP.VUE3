@@ -23,7 +23,8 @@ export function getShowMenuList(menuList: Menu.MenuOptions[]) {
     return menuList.filter(item => {
         //短路逻辑
         item.children?.length && (item.children == getShowMenuList(item.children))
-        return !item.IsHide
+        // return !item.IsHide
+        return !item.IsButton
     })
 }
 

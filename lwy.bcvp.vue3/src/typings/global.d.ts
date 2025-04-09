@@ -42,10 +42,12 @@ declare namespace Menu {
       children?: MenuOptions[] | null;
     }
     interface MetaProps {
+      icon: string;
       title: string | null;
       requireAuth: boolean;
       NoTabPage: boolean;
       keepAlive: boolean;
+      isLink?: string;
     }
     
     export interface MenuRequest {
