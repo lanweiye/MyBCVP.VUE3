@@ -1,6 +1,6 @@
 <template>
-    <!-- <Maximize v-show="maximize" />
-    <Tabs v-show="tabs" /> -->
+    <!-- <Maximize v-show="maximize" /> -->
+    <Tabs v-show="tabs" />
     <div>tabs</div>
     <el-main>
       <router-view v-slot="{ Component, route }">
@@ -23,7 +23,8 @@
   import { useDebounceFn } from "@vueuse/core";
   import { useGlobalStore } from "@/stores/modules/global";
   import { useKeepAliveStore } from "@/stores/modules/keepAlive";
-  
+  import Tabs from "@/layouts/components/Tabs/index.vue";
+
   const globalStore = useGlobalStore();
   const { maximize, isCollapse, layout, tabs, footer } = storeToRefs(globalStore);
   

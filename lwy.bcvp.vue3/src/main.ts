@@ -11,10 +11,11 @@ import "element-plus/theme-chalk/dark/css-vars.css"
 import ElementPlus from "element-plus"
 // element icons
 import * as Icons from "@element-plus/icons-vue"
-
+import "@/assets/iconfont/iconfont.scss";
 
 import App from './App.vue'
 import router from './router'
+import pinia from './stores'
 
 const app = createApp(App)
 
@@ -24,7 +25,8 @@ Object.keys(Icons).forEach(key => {
 })
 
 app.use(ElementPlus)
-app.use(createPinia())
+// app.use(createPinia())
+app.use(pinia)
 app.use(router)
 
 app.mount('#app')
