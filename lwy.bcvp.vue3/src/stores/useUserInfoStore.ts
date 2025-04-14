@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import piniaPersistConfig from './config/piniaPersist';
 
 export const useUserInfoStore = defineStore('userinfo', {
   state: (): { user: User.UserResponse | null } => ({
@@ -7,19 +8,20 @@ export const useUserInfoStore = defineStore('userinfo', {
   actions: {
     setUser(user: User.UserResponse) {
       this.user = user;
-      localStorage.setItem('userinfo', JSON.stringify(user));
+      // localStorage.setItem('userinfo', JSON.stringify(user));
     },
-    getUser() {
-      const user = localStorage.getItem('userinfo');
-      if (user) {
-        this.user = JSON.parse(user);
-      }
-    },
+    // getUser() {
+    //   const user = localStorage.getItem('userinfo');
+    //   if (user) {
+    //     this.user = JSON.parse(user);
+    //   }
+    // },
     clearUser() {
       this.user = null;
       localStorage.removeItem('userinfo');
     }
-  }
+  },
+  persist: piniaPersistConfig("userinfo")
 });
 
 // 这种写法编译器提示报错
