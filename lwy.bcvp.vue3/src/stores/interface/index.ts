@@ -1,4 +1,4 @@
-export type LayoutType = 'vertical' //| 'classic' | 'transverse' | 'columns
+export type LayoutType = 'vertical' | 'transverse'  //| 'classic' | 'transverse' | 'columns
 
 export type AssemblySizeType = 'large' | 'default' | 'small'
 

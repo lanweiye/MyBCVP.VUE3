@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import type { GlobalState } from "@/stores/interface";
 // import { DEFAULT_PRIMARY } from "@/config";
-// import piniaPersistConfig from "@/stores/helper/persist";
+import piniaPersistConfig from "@/stores/config/piniaPersist";
 
 export const useGlobalStore = defineStore("lwyblogvue3-global",{
   // 修改默认值之后，需清除 localStorage 数据
@@ -50,5 +50,5 @@ export const useGlobalStore = defineStore("lwyblogvue3-global",{
       this.$patch({ [args[0]]: args[1] });
     }
   },
-//   persist: piniaPersistConfig("geeker-global")
+  persist: piniaPersistConfig("lwyblogvue3-global")
 });
