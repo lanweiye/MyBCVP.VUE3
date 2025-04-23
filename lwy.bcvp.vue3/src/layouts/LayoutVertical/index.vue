@@ -39,7 +39,7 @@ import ToolBarLeft from "@/layouts/components/Header/ToolBarLeft.vue";
 import SubMenu from "@/layouts/components/Menu/SubMenu.vue";
 import ToolBarRight from "../components/Header/ToolBarRight.vue";
 
-const title = import.meta.env.VITE_GLOB_APP_TITLE;
+const title = "BlogVue3";
 
 const route = useRoute();
 const authStore = useAuthMenuStore();

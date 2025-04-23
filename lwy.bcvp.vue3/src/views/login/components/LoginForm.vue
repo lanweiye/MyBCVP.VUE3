@@ -36,7 +36,8 @@ import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm, UserInput } from "element-plus";
 import { login, userInfo } from "@/api/loginApi";
 import { useUserInfoStore } from '@/stores/useUserInfoStore';
-import type { LoginRequest, BaseResponse, LoginResponse } from '@/api/loginApi';
+import type { LoginRequest, LoginResponse } from '@/api/loginApi';
+import type { BaseResponse } from '@/utils/axiosInstance';
 import { useAuthStore } from '@/stores/auth';
 import { initDynamicRouter } from "@/router/modules/dynamicRouter";
 

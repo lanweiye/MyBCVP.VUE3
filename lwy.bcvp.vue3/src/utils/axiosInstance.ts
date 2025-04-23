@@ -3,6 +3,43 @@ import type { InternalAxiosRequestConfig,AxiosResponse } from "axios";
 import { useAuthStore } from "@/stores/auth";
 import router from "@/router";
 
+
+/**
+ * 基础响应接口，使用泛型 T 来表示响应体
+ * @template T
+ * @interface BaseResponse
+ * @property {number} status - HTTP 响应状态码
+ * @property {boolean} success - 请求是否成功
+ * @property {string} msg - 响应的消息
+ * @property {string | null} [msgDev] - 开发用的详细信息，可能为空
+ * @property {T} response - 具体的响应数据
+ */
+export interface BaseResponse<T> {
+    status: number;
+    success: boolean;
+    msg: string;
+    msgDev?: string | null;
+    response: T;
+}
+
+/**
+ * 分页响应基类接口，使用泛型 T 来表示数据列表
+ * @template T
+ * @interface PageModel
+ * @property {number} PageSize - 每页条数
+ * @property {number} dataCount - 数据总条数
+ * @property {number} page - 当前页码
+ * @property {number} pageCount - 总页数
+ * @property {T} data - 具体的响应数据数组
+ */
+export interface PageModel<T> {
+    PageSize: number;
+    dataCount: number;
+    page: number;
+    pageCount: number;
+    data: T[];
+}
+
 //创建axios 实例
 const axiosInstace = axios.create({
     baseURL: '',  // API基础URL
